@@ -1,0 +1,16 @@
+package com.project.model;
+
+import java.sql.Date;
+
+public class User {
+	private String name;
+	private String phone;
+	private String email;
+	private String userName;
+	private String password;
+	private String address;
+	private String proffesion;
+	private Date birthDate;
+	private boolean premium;
+
+}

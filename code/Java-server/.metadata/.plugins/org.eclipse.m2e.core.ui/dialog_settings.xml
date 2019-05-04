@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="E:\Anul_III\SEM_II\PS\Proiect\Code\Java-server\flower-shop3-server"/>
+			<item value="E:\Anul_III\SEM_II\PS\Proiect\Code\Java-server\CVTool (1)"/>
+			<item value="E:\Anul_III\SEM_II\PS\Proiect\Code\Java-server\CVTool (1)\CVTool"/>
+			<item value="E:\Anul_III\SEM_II\PS\Proiect\Code\Java-server\cvTool"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+</section>

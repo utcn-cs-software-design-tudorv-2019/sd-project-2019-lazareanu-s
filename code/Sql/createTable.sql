@@ -33,13 +33,39 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `cvTool`.`CV`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `cvTool`.`CV` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `path` VARCHAR(255) NULL,
+  `other_qualifications` VARCHAR(255) NULL,
+  `personal_description` VARCHAR(255) NULL,
+  `user` INT NOT NULL,
+  PRIMARY KEY (`id`, `user`),
+  INDEX `fk_CV_User1_idx` (`user` ASC),
+  CONSTRAINT `fk_CV_User1`
+    FOREIGN KEY (`user`)
+    REFERENCES `cvTool`.`User` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `cvTool`.`Language`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cvTool`.`Language` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL,
   `qualifier` INT NULL,
-  PRIMARY KEY (`id`))
+  `CV` INT NOT NULL,
+  PRIMARY KEY (`id`, `CV`),
+  INDEX `fk_Language_CV1_idx` (`CV` ASC),
+  CONSTRAINT `fk_Language_CV1`
+    FOREIGN KEY (`CV`)
+    REFERENCES `cvTool`.`CV` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -50,19 +76,14 @@ CREATE TABLE IF NOT EXISTS `cvTool`.`Skill` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL,
   `qualifier` INT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `cvTool`.`Experience`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cvTool`.`Experience` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NULL,
-  `end_date` DATETIME NULL,
-  `start_date` DATETIME NULL,
-  PRIMARY KEY (`id`))
+  `CV` INT NOT NULL,
+  PRIMARY KEY (`id`, `CV`),
+  INDEX `fk_Skill_CV1_idx` (`CV` ASC),
+  CONSTRAINT `fk_Skill_CV1`
+    FOREIGN KEY (`CV`)
+    REFERENCES `cvTool`.`CV` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -74,52 +95,31 @@ CREATE TABLE IF NOT EXISTS `cvTool`.`Education` (
   `name` VARCHAR(255) NULL,
   `start_date` DATETIME NULL,
   `end_date` DATETIME NULL,
-  PRIMARY KEY (`id`))
+  `CV` INT NOT NULL,
+  PRIMARY KEY (`id`, `CV`),
+  INDEX `fk_Education_CV1_idx` (`CV` ASC),
+  CONSTRAINT `fk_Education_CV1`
+    FOREIGN KEY (`CV`)
+    REFERENCES `cvTool`.`CV` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cvTool`.`CV`
+-- Table `cvTool`.`Experience`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cvTool`.`CV` (
+CREATE TABLE IF NOT EXISTS `cvTool`.`Experience` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `path` VARCHAR(255) NULL,
-  `other_qualifications` VARCHAR(255) NULL,
-  `personal_description` VARCHAR(255) NULL,
-  `User_id` INT NOT NULL,
-  `Language_id` INT NOT NULL,
-  `Skill_id` INT NOT NULL,
-  `Experience_id` INT NOT NULL,
-  `Education_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `User_id`, `Language_id`, `Skill_id`, `Experience_id`, `Education_id`),
-  INDEX `fk_CV_User1_idx` (`User_id` ASC),
-  INDEX `fk_CV_Language1_idx` (`Language_id` ASC),
-  INDEX `fk_CV_Skill1_idx` (`Skill_id` ASC),
-  INDEX `fk_CV_Experience1_idx` (`Experience_id` ASC),
-  INDEX `fk_CV_Education1_idx` (`Education_id` ASC),
-  CONSTRAINT `fk_CV_User1`
-    FOREIGN KEY (`User_id`)
-    REFERENCES `cvTool`.`User` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_CV_Language1`
-    FOREIGN KEY (`Language_id`)
-    REFERENCES `cvTool`.`Language` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_CV_Skill1`
-    FOREIGN KEY (`Skill_id`)
-    REFERENCES `cvTool`.`Skill` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_CV_Experience1`
-    FOREIGN KEY (`Experience_id`)
-    REFERENCES `cvTool`.`Experience` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_CV_Education1`
-    FOREIGN KEY (`Education_id`)
-    REFERENCES `cvTool`.`Education` (`id`)
+  `name` VARCHAR(255) NULL,
+  `end_date` DATETIME NULL,
+  `start_date` DATETIME NULL,
+  `CV` INT NOT NULL,
+  PRIMARY KEY (`id`, `CV`),
+  INDEX `fk_Experience_CV1_idx` (`CV` ASC),
+  CONSTRAINT `fk_Experience_CV1`
+    FOREIGN KEY (`CV`)
+    REFERENCES `cvTool`.`CV` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

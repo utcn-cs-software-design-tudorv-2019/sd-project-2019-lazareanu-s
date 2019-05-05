@@ -1,0 +1,51 @@
+package com.project.model.entities;
+
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+public class Language {
+	private Long id;
+	private String name;
+	private int qualifier;
+	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "language")
+	private Cv cv;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getQualifier() {
+		return qualifier;
+	}
+
+	public void setQualifier(int qualifier) {
+		this.qualifier = qualifier;
+	}
+
+	public Cv getCv() {
+		return cv;
+	}
+
+	public void setCv(Cv cv) {
+		this.cv = cv;
+	}
+	
+	
+
+}

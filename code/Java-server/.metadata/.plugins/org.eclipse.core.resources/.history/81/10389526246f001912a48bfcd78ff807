@@ -1,0 +1,15 @@
+package com.project.model.entities;
+
+import javax.persistence.ManyToMany;
+
+public class Cv {
+
+	private Long id;
+	private String path;
+	private String otherQualifications;
+	private String personalDescription;
+	
+	@ManyToOne
+	@JoinColumn(name = "user")
+	private User user;
+}

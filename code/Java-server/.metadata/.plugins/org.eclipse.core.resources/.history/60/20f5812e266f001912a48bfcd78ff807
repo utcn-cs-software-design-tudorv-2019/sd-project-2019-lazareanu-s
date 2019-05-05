@@ -1,0 +1,17 @@
+package com.project.model.entities;
+
+import java.sql.Date;
+
+import javax.persistence.OneToMany;
+
+public class Experience {
+	private Long id;
+	private String name;
+	private Date startDate;
+	private Date endDate;
+	
+	@OneToMany(mappedBy = "experience")
+	private Cv cv;
+	
+
+}

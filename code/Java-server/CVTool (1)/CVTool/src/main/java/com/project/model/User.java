@@ -1,8 +1,24 @@
 package com.project.model;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "User")
 public class User {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
 	private String name;
 	private String phone;
@@ -14,18 +30,15 @@ public class User {
 	private Date birthDate;
 	private boolean premium;
 
-	public User(String name, String phone, String email, String userName, String password, String address,
-			String proffesion, Date birthDate, boolean premium) {
-		super();
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.userName = userName;
-		this.password = password;
-		this.address = address;
-		this.proffesion = proffesion;
-		this.birthDate = birthDate;
-		this.premium = premium;
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	private List<Cv> cv;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -100,4 +113,13 @@ public class User {
 		this.premium = premium;
 	}
 
+	public List<Cv> getCv() {
+		return cv;
+	}
+
+	public void setCv(List<Cv> cv) {
+		this.cv = cv;
+	}
+
+	
 }

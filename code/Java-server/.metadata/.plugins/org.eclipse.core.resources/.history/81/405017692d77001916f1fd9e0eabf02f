@@ -1,0 +1,53 @@
+package com.project.services;
+
+import java.util.List;
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.project.model.User;
+import com.project.repository.UserRepository;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserRepository userRepo;
+
+	@Override
+	public List<User> getAll() {
+		return userRepo.findAll();
+
+	}
+
+	@Override
+	public User getByEmail(String email) {
+		User result=null;
+		List<User> allUsers = getAll();
+		for (User user : allUsers) {
+			if(user.getEmail().equals(email)) {
+				result=user;
+				break;
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public User getById(Long Id) {
+		return null;
+	}
+
+	@Override
+	public User login(String email, String password) {
+		User currentUser=getByEmail(email);
+		if(!Objects.isNull(currentUser)) {
+			if(currentUser.getPassword().equals(password)) {
+				return currentUser;
+			}
+		}
+		return currentUser;
+	}
+
+}

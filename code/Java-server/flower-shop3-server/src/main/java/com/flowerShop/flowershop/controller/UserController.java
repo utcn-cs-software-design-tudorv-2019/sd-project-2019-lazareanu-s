@@ -35,22 +35,22 @@ public class UserController {
 		return userRepository.save(user);
 
 	}
-	
+
 	@PostMapping("/login")
 	@ResponseStatus(HttpStatus.OK)
 	public User login(@RequestBody User user) {
-		//user.setPassword(encodePassword(user.getPassword()));
-		User loginUser=this.getUserByEmail(user.getEmail());
-		if(loginUser==null) {
+		// user.setPassword(encodePassword(user.getPassword()));
+		User loginUser = this.getUserByEmail(user.getEmail());
+		if (loginUser == null) {
 			return null;
-		}else {
+		} else {
 			if (encodePassword(user.getPassword()).equals(loginUser.getPassword())) {
 				return loginUser;
 			}
 		}
-		
+
 		return null;
-		//return userRepository.save(user);
+		// return userRepository.save(user);
 
 	}
 
@@ -60,7 +60,7 @@ public class UserController {
 	}
 
 	private String encodePassword(String password) {
-		try {
+		try{
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
 			byte[] hash = digest.digest(password.getBytes("UTF-8"));
 			StringBuilder hexString = new StringBuilder();

@@ -1,0 +1,8 @@
+package com.project.services;
+
+public interface UserService {
+	void getAll();
+	User getByEmail();
+	
+
+}

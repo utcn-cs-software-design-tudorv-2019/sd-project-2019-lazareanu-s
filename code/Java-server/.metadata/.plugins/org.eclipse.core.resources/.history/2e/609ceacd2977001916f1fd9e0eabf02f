@@ -1,0 +1,25 @@
+package com.project.services;
+
+import com.project.model.User;
+
+public class UserServiceImpl implements UserService {
+
+	@Override
+	public void getAll() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public User getByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User getById(Long Id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,6 +1,0 @@
-package com.project.model.entities;
-
-public class Cv {
-
-	private Long id;
-}

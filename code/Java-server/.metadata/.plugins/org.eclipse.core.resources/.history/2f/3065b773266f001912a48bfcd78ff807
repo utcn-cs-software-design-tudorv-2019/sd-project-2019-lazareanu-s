@@ -1,9 +1,0 @@
-package com.project.model.entities;
-
-public class Education {
-	private Long id;
-	private String name;
-	private Date startDate;
-	private Date endDate;
-
-}

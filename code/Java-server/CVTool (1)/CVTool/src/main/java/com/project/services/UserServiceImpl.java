@@ -5,11 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.project.model.User;
 import com.project.repository.UserRepository;
@@ -28,11 +25,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getByEmail(String email) {
-		User result=null;
+		User result = null;
 		List<User> allUsers = getAll();
 		for (User user : allUsers) {
-			if(user.getEmail().equals(email)) {
-				result=user;
+			if (user.getEmail().equals(email)) {
+				result = user;
 				break;
 			}
 		}
@@ -46,23 +43,24 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User login(String email, String password) {
-		User currentUser=getByEmail(email);
-		if(!Objects.isNull(currentUser)) {
-			//if (encodePassword(user.getPassword()).equals(loginUser.getPassword())) {
-			if(currentUser.getPassword().equals(password)) {
+		User currentUser = getByEmail(email);
+		if (!Objects.isNull(currentUser)) {
+			// if (encodePassword(user.getPassword()).equals(loginUser.getPassword())) {
+			if (currentUser.getPassword().equals(password)) {
 				return currentUser;
 			}
 		}
 		return null;
 	}
 
-	@PostMapping
-	@ResponseStatus(HttpStatus.OK)
+//	@PostMapping
+//	@ResponseStatus(HttpStatus.OK)
+	@Override
 	public User save(@RequestBody User user) {
 		user.setPassword(encodePassword(user.getPassword()));
 		return userRepo.save(user);
 	}
-	
+
 	private String encodePassword(String password) {
 		try {
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");

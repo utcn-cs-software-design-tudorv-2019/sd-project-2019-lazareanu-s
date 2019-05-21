@@ -1,0 +1,13 @@
+package com.project.services;
+
+import java.util.List;
+
+import com.project.model.Experience;
+
+public interface ExperienceService {
+
+	Experience save(Experience experience);
+
+	List<Experience> getAll();
+
+}

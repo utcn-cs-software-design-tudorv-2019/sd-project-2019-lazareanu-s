@@ -9,10 +9,10 @@ public interface UserService {
 
 	User getByEmail(String email);
 
-	User getById(Long Id);
-	
+	User getById(Long id);
+
 	User login(String email, String password);
-	
+
 	User save(User user);
 
 }

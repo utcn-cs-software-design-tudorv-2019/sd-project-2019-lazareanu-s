@@ -56,4 +56,9 @@ public class Language {
 		this.cv = cv;
 	}
 
+	@Override
+	public String toString() {
+		return "Language [id=" + id + ", name=" + name + ", qualifier=" + qualifier + ", cv=" + cv + "]";
+	}
+
 }

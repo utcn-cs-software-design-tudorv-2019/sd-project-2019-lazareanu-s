@@ -1,5 +1,6 @@
 package com.project.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -13,8 +14,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Experience")
-public class Experience {
+public class Experience implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -24,7 +26,7 @@ public class Experience {
 	private Date endDate;
 
 	@ManyToOne
-	@JoinColumn(name = "cv")
+	@JoinColumn(name = "CV")
 	private Cv cv;
 
 	public Long getId() {
@@ -65,6 +67,12 @@ public class Experience {
 
 	public void setCv(Cv cv) {
 		this.cv = cv;
+	}
+
+	@Override
+	public String toString() {
+		return "Experience [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", cv="
+				+ cv + "]";
 	}
 
 }

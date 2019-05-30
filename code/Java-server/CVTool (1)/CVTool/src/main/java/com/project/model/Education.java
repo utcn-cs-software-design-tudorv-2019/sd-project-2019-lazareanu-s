@@ -66,4 +66,11 @@ public class Education {
 	public void setCv(Cv cv) {
 		this.cv = cv;
 	}
+
+	@Override
+	public String toString() {
+		return "Education [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", cv="
+				+ cv + "]";
+	}
+	
 }

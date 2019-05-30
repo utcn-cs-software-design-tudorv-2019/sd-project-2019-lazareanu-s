@@ -56,4 +56,9 @@ public class Skill {
 		this.cv = cv;
 	}
 
+	@Override
+	public String toString() {
+		return "Skill [id=" + id + ", name=" + name + ", qualifier=" + qualifier + ", cv=" + cv + "]";
+	}
+
 }

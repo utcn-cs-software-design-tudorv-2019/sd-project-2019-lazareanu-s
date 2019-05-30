@@ -7,4 +7,9 @@
 <fullyQualifiedTypeName name="antlr.collections.List"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.Objects"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="com.project.services.CvService"/>
+<fullyQualifiedTypeName name="com.project.services.CvServiceImpl"/>
+<fullyQualifiedTypeName name="com.project.services.UserService"/>
+<fullyQualifiedTypeName name="com.project.services.UserServiceImpl"/>
 </qualifiedTypeNameHistroy>

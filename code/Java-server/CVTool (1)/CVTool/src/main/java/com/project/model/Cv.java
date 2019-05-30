@@ -1,5 +1,6 @@
 package com.project.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,10 +13,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name = "Cv")
-public class Cv {
+public class Cv implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -28,15 +33,19 @@ public class Cv {
 	@JoinColumn(name = "user")
 	private User user;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "cv")
 	private List<Language> language;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "cv")
 	private List<Skill> skill;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "cv")
 	private List<Education> education;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "cv")
 	private List<Experience> experience;
 
@@ -110,6 +119,13 @@ public class Cv {
 
 	public void setExperience(List<Experience> experience) {
 		this.experience = experience;
+	}
+
+	@Override
+	public String toString() {
+		return "Cv [id=" + id + ", path=" + path + ", otherQualifications=" + otherQualifications
+				+ ", personalDescription=" + personalDescription + ", user=" + user + ", language=" + language
+				+ ", skill=" + skill + ", education=" + education + "]";
 	}
 
 }

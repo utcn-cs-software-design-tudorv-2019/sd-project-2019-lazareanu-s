@@ -45,8 +45,8 @@ public class UserServiceImpl implements UserService {
 	public User login(String email, String password) {
 		User currentUser = getByEmail(email);
 		if (!Objects.isNull(currentUser)) {
-			// if (encodePassword(user.getPassword()).equals(loginUser.getPassword())) {
-			if (currentUser.getPassword().equals(password)) {
+			if (encodePassword(password).equals(currentUser.getPassword())) {
+				// if (currentUser.getPassword().equals(password)) {
 				return currentUser;
 			}
 		}

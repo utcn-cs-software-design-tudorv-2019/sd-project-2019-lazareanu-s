@@ -1,7 +1,6 @@
 package com.project.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -31,23 +29,24 @@ public class Cv implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "user")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private User user;
 
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "cv")
-	private List<Language> language;
-
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "cv")
-	private List<Skill> skill;
-
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "cv")
-	private List<Education> education;
-
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "cv")
-	private List<Experience> experience;
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@OneToMany(mappedBy = "cv")
+//	private List<Language> language;
+//
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@OneToMany(mappedBy = "cv")
+//	private List<Skill> skill;
+//
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@OneToMany(mappedBy = "cv")
+//	private List<Education> education;
+//
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@OneToMany(mappedBy = "cv")
+//	private List<Experience> experience;
 
 	public Long getId() {
 		return id;
@@ -89,43 +88,43 @@ public class Cv implements Serializable {
 		this.user = user;
 	}
 
-	public List<Language> getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(List<Language> language) {
-		this.language = language;
-	}
-
-	public List<Skill> getSkill() {
-		return skill;
-	}
-
-	public void setSkill(List<Skill> skill) {
-		this.skill = skill;
-	}
-
-	public List<Education> getEducation() {
-		return education;
-	}
-
-	public void setEducation(List<Education> education) {
-		this.education = education;
-	}
-
-	public List<Experience> getExperience() {
-		return experience;
-	}
-
-	public void setExperience(List<Experience> experience) {
-		this.experience = experience;
-	}
-
-	@Override
-	public String toString() {
-		return "Cv [id=" + id + ", path=" + path + ", otherQualifications=" + otherQualifications
-				+ ", personalDescription=" + personalDescription + ", user=" + user + ", language=" + language
-				+ ", skill=" + skill + ", education=" + education + "]";
-	}
+//	public List<Language> getLanguage() {
+//		return language;
+//	}
+//
+//	public void setLanguage(List<Language> language) {
+//		this.language = language;
+//	}
+//
+//	public List<Skill> getSkill() {
+//		return skill;
+//	}
+//
+//	public void setSkill(List<Skill> skill) {
+//		this.skill = skill;
+//	}
+//
+//	public List<Education> getEducation() {
+//		return education;
+//	}
+//
+//	public void setEducation(List<Education> education) {
+//		this.education = education;
+//	}
+//
+//	public List<Experience> getExperience() {
+//		return experience;
+//	}
+//
+//	public void setExperience(List<Experience> experience) {
+//		this.experience = experience;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "Cv [id=" + id + ", path=" + path + ", otherQualifications=" + otherQualifications
+//				+ ", personalDescription=" + personalDescription + ", user=" + user + ", language=" + language
+//				+ ", skill=" + skill + ", education=" + education + "]";
+//	}
 
 }

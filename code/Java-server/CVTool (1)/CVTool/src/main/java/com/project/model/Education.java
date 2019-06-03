@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name = "Education")
 public class Education {
@@ -25,6 +28,7 @@ public class Education {
 
 	@ManyToOne
 	@JoinColumn(name = "cv")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Cv cv;
 
 	public Long getId() {
@@ -72,5 +76,5 @@ public class Education {
 		return "Education [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", cv="
 				+ cv + "]";
 	}
-	
+
 }

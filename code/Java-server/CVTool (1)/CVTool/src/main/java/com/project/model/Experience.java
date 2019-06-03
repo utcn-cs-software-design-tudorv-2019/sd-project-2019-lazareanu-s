@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name = "Experience")
 public class Experience implements Serializable {
@@ -27,6 +30,7 @@ public class Experience implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "CV")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Cv cv;
 
 	public Long getId() {

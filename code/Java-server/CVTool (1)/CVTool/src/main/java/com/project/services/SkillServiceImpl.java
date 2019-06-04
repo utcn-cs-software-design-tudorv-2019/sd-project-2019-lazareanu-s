@@ -24,4 +24,10 @@ public class SkillServiceImpl implements SkillService {
 		return skillRepo.findAll();
 	}
 
+	@Override
+	public void delete(Skill skill) {
+		skillRepo.delete(skill);
+		
+	}
+
 }

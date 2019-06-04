@@ -88,6 +88,61 @@ public class Cv implements Serializable {
 		this.user = user;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((otherQualifications == null) ? 0 : otherQualifications.hashCode());
+		result = prime * result + ((path == null) ? 0 : path.hashCode());
+		result = prime * result + ((personalDescription == null) ? 0 : personalDescription.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cv other = (Cv) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (otherQualifications == null) {
+			if (other.otherQualifications != null)
+				return false;
+		} else if (!otherQualifications.equals(other.otherQualifications))
+			return false;
+		if (path == null) {
+			if (other.path != null)
+				return false;
+		} else if (!path.equals(other.path))
+			return false;
+		if (personalDescription == null) {
+			if (other.personalDescription != null)
+				return false;
+		} else if (!personalDescription.equals(other.personalDescription))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Cv [id=" + id + ", path=" + path + ", otherQualifications=" + otherQualifications
+				+ ", personalDescription=" + personalDescription + ", user=" + user + "]";
+	}
+
 //	public List<Language> getLanguage() {
 //		return language;
 //	}
@@ -126,5 +181,7 @@ public class Cv implements Serializable {
 //				+ ", personalDescription=" + personalDescription + ", user=" + user + ", language=" + language
 //				+ ", skill=" + skill + ", education=" + education + "]";
 //	}
+	
+	
 
 }

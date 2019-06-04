@@ -24,4 +24,9 @@ public class EducationServiceImpl implements EducationService {
 		return educationRepo.findAll();
 	}
 
+	@Override
+	public void delete(Education education) {
+		educationRepo.delete(education);
+	}
+
 }

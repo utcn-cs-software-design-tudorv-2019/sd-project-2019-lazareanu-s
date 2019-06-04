@@ -9,5 +9,7 @@ public interface ExperienceService {
 	Experience save(Experience experience);
 
 	List<Experience> getAll();
+	
+	void delete(Experience experience);
 
 }

@@ -26,11 +26,29 @@ public class CvController {
 		return cvService.getAll();
 	}
 
+	@PostMapping("/generate")
+	@ResponseStatus(HttpStatus.OK)
+	public void generateCv(@RequestBody Cv cv) {
+		cvService.generatePdf(cv);
+	}
+
+	@PostMapping("/showPdf")
+	@ResponseStatus(HttpStatus.OK)
+	public void showsPdf(@RequestBody Cv cv) {
+		cvService.showPdf(cv);
+	}
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
 	public Cv add(@RequestBody Cv cv) {
 		return cvService.save(cv);
 
+	}
+	
+	@PostMapping("/delete")
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@RequestBody Cv cv) {
+		cvService.delete(cv);
 	}
 
 }

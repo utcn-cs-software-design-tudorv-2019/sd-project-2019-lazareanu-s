@@ -33,4 +33,10 @@ public class ExperienceController {
 
 	}
 
+	@PostMapping("/delete")
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@RequestBody Experience experience) {
+		experienceService.delete(experience);
+	}
+
 }

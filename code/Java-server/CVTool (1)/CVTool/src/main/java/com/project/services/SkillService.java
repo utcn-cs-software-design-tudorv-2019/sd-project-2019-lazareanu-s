@@ -9,5 +9,7 @@ public interface SkillService {
 	Skill save(Skill skill);
 
 	List<Skill> getAll();
+	
+	void delete(Skill skill);
 
 }

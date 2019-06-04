@@ -1,0 +1,283 @@
+package com.project.services;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.project.model.Cv;
+import com.project.model.Education;
+import com.project.model.Experience;
+import com.project.model.Language;
+import com.project.model.Skill;
+import com.project.repository.CvRepository;
+import com.project.repository.EducationRepository;
+import com.project.repository.ExperienceRepository;
+import com.project.repository.LanguageRepository;
+import com.project.repository.SkillRepository;
+
+@Service
+public class CvServiceImpl implements CvService {
+
+	@Autowired
+	private CvRepository cvRepo;
+
+	@Autowired
+	private EducationRepository educationRepo;
+
+	@Autowired
+	private LanguageRepository languageRepo;
+
+	@Autowired
+	private ExperienceRepository experienceRepository;
+
+	@Autowired
+	private SkillRepository skillRepository;
+
+	@Override
+	public Cv save(Cv cv) {
+		return cvRepo.save(cv);
+	}
+
+	@Override
+	public List<Cv> getAll() {
+		return cvRepo.findAll();
+	}
+
+	@Override
+	public Document generatePdf(Cv cv) {
+		Document document = new Document();
+		try {
+			String filePath = cv.getUser().getName() + "_" + cv.getId() + ".pdf";
+			FileOutputStream pdfFile = new FileOutputStream("C:\\Users\\Sabina\\Desktop\\" + filePath);
+
+			PdfWriter.getInstance(document, pdfFile);
+			document.open();
+
+			// title
+			Paragraph title = new Paragraph();
+			Font romanianTitleFont = new Font(Font.FontFamily.TIMES_ROMAN, 22, Font.BOLD);
+
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+			Date date = new Date();
+
+			Paragraph titleRomanian = new Paragraph(cv.getUser().getName() + "\n" + "(" + dateFormat.format(date) + ")",
+					romanianTitleFont);
+			titleRomanian.setAlignment(Paragraph.ALIGN_RIGHT);
+			title.add(titleRomanian);
+			document.add(title);
+			document.add(new Paragraph("\n"));
+			document.add(new Paragraph("\n"));
+			// line
+			Paragraph line = new Paragraph(
+					"---------------------------------------------------------------------------------------------------------------------");
+			document.add(line);
+
+			// Info
+			Font infoFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
+			Paragraph INFO = new Paragraph("INFO ", infoFont);
+			Paragraph infoAddress = new Paragraph("Address: " + cv.getUser().getAddress());
+			Paragraph infoPhone = new Paragraph("Phone: " + cv.getUser().getPhone());
+			Paragraph infoName = new Paragraph("Email: " + cv.getUser().getEmail());
+			Paragraph infoBirth = new Paragraph("Born: " + cv.getUser().getBirthDate());
+			Paragraph infoJob = new Paragraph("Proffesion: " + cv.getUser().getProffesion());
+
+			document.add(INFO);
+			document.add(infoAddress);
+			document.add(infoPhone);
+			document.add(infoName);
+			document.add(infoBirth);
+			document.add(infoJob);
+			document.add(new Paragraph("\n"));
+
+			Paragraph EDUCATION = new Paragraph("EDUCATION ", infoFont);
+			document.add(line);
+			document.add(EDUCATION);
+			List<Education> educations = educationRepo.findAll();
+			Paragraph educationParagraph;
+
+			for (Education education : educations) {
+				if (cv.getId().equals(education.getCv().getId())) {
+					educationParagraph = new Paragraph(education.getName() + "\t BEGIN: " + education.getStartDate()
+							+ "\t END: " + education.getEndDate());
+					document.add(educationParagraph);
+				}
+			}
+
+			Paragraph LANGUAGES = new Paragraph("LANGUAGES ", infoFont);
+			document.add(line);
+			document.add(LANGUAGES);
+			List<Language> languages = languageRepo.findAll();
+			Paragraph laguageParagraph;
+
+			for (Language language : languages) {
+				if (cv.getId().equals(language.getCv().getId())) {
+					laguageParagraph = new Paragraph(language.getName() + "\t QUALIFIER: " + language.getQualifier());
+					document.add(laguageParagraph);
+				}
+			}
+
+			Paragraph EXPERIENCE = new Paragraph("EXPERIENCE ", infoFont);
+			document.add(line);
+			document.add(EXPERIENCE);
+			List<Experience> experiences = experienceRepository.findAll();
+			Paragraph experienceParagraph;
+
+			for (Experience experience : experiences) {
+				if (cv.getId().equals(experience.getCv().getId())) {
+					experienceParagraph = new Paragraph(experience.getName() + "\t BEGIN: " + experience.getStartDate()
+							+ "\t END: " + experience.getEndDate());
+					document.add(experienceParagraph);
+				}
+			}
+
+			Paragraph SKILLS = new Paragraph("SKILLS ", infoFont);
+			document.add(line);
+			document.add(SKILLS);
+			List<Skill> skills = skillRepository.findAll();
+			Paragraph skillParagraph;
+
+			for (Skill skill : skills) {
+				if (cv.getId().equals(skill.getCv().getId())) {
+					skillParagraph = new Paragraph(skill.getName() + "\t QUALIFIER: " + skill.getQualifier());
+					document.add(skillParagraph);
+				}
+			}
+
+			Paragraph OTHER = new Paragraph("OTHER QUALIFICATIONS ", infoFont);
+			document.add(line);
+			document.add(OTHER);
+			Paragraph other = new Paragraph(cv.getOtherQualifications());
+			document.add(other);
+
+			Paragraph DESCRIPTION = new Paragraph("PERSONAL DESCRIPTION ", infoFont);
+			document.add(line);
+			document.add(DESCRIPTION);
+			Paragraph description = new Paragraph(cv.getPersonalDescription());
+			document.add(description);
+
+			cv.setPath("C:\\Users\\Sabina\\Desktop\\" + filePath);
+			cvRepo.save(cv);
+
+//			// type of vacation
+//			Paragraph vacationType = new Paragraph();
+//			Font vacationTypeFont = new Font(Font.FontFamily.TIMES_ROMAN, 14);
+//			Paragraph vacationTypeTitle = new Paragraph("TIP CONCEDIU (TYPE OF VACATION) : ", vacationTypeFont);
+//			vacationTypeTitle.setIndentationLeft(50);
+//			PdfPTable vacationTypeTable = new PdfPTable(2);
+//			vacationTypeTable.setWidths(new float[] { 3, 1 });
+//			PdfPCell tableHeader1 = new PdfPCell(new Phrase("DE ODIHNA (REST)", vacationTypeFont));
+//			PdfPCell tableHeader2 = new PdfPCell(new Phrase("FARA PLATA (WITHOUT PAYMENT)", vacationTypeFont));
+//			PdfPCell tableHeader3 = new PdfPCell(new Phrase("ALTE TIPURI (OTHERS)", vacationTypeFont));
+//			PdfPCell check1 = null;
+//			PdfPCell check2 = null;
+//			PdfPCell check3 = null;
+//			if (request.getTypeOfVacation() != null) {
+//				if (request.getTypeOfVacation().equalsIgnoreCase("REST")) {
+//					check1 = new PdfPCell(new Phrase("X", vacationTypeFont));
+//					check2 = new PdfPCell(new Phrase(" ", vacationTypeFont));
+//					check3 = new PdfPCell(new Phrase(" ", vacationTypeFont));
+//				} else if (request.getTypeOfVacation().equalsIgnoreCase("WITHOUT")) {
+//					check1 = new PdfPCell(new Phrase(" ", vacationTypeFont));
+//					check2 = new PdfPCell(new Phrase("X", vacationTypeFont));
+//					check3 = new PdfPCell(new Phrase(" ", vacationTypeFont));
+//				} else if (request.getTypeOfVacation().equalsIgnoreCase("OTHERS")) {
+//					check1 = new PdfPCell(new Phrase(" ", vacationTypeFont));
+//					check2 = new PdfPCell(new Phrase(" ", vacationTypeFont));
+//					check3 = new PdfPCell(new Phrase("X", vacationTypeFont));
+//				}
+//			} else {
+//				// throw new PdfGenerationException("Please select a vacation type!"," ");
+//			}
+//			vacationTypeTable.addCell(tableHeader1);
+//			vacationTypeTable.addCell(check1);
+//			vacationTypeTable.addCell(tableHeader2);
+//			vacationTypeTable.addCell(check2);
+//			vacationTypeTable.addCell(tableHeader3);
+//			vacationTypeTable.addCell(check3);
+//			vacationType.add(vacationTypeTitle);
+//			vacationType.add(new Paragraph("\n"));
+//			vacationType.add(vacationTypeTable);
+//			vacationType.add(new Paragraph("\n"));
+//			document.add(vacationType);
+//			// period
+//			Paragraph period = new Paragraph("PERIOADA (PERIOD) : " + convertTime(request.getStartDate().getTime())
+//					+ " - " + convertTime(request.getEndDate().getTime()), vacationTypeFont);
+//			period.add("\n");
+//			period.add("\n");
+//			period.setIndentationLeft(50);
+//			document.add(period);
+//			// number of days
+//			Paragraph noOfDays = new Paragraph("NUMAR TOTAL ZILE CONCEDIU : " + numberOfDays, vacationTypeFont);
+//			Paragraph noOfDays2 = new Paragraph("(TOTAL DAYS OF VACATION)", vacationTypeFont);
+//			noOfDays2.add("\n");
+//			noOfDays2.add("\n");
+//			noOfDays.setIndentationLeft(50);
+//			noOfDays2.setIndentationLeft(50);
+//			document.add(noOfDays);
+//			document.add(noOfDays2);
+//			// return date
+//			Paragraph returnDate = new Paragraph(
+//					"DATA INTOARCERII EFECTIVE LA LUCRU : " + convertTime(request.getReturnDate().getTime()),
+//					vacationTypeFont);
+//			Paragraph returnDate2 = new Paragraph("(RETURN DATE)", vacationTypeFont);
+//			returnDate2.add("\n");
+//			returnDate2.add("\n");
+//			returnDate.setIndentationLeft(50);
+//			returnDate2.setIndentationLeft(50);
+//			document.add(returnDate);
+//			document.add(returnDate2);
+//			// employee signature and date
+//			Paragraph signatureAndDate = new Paragraph();
+//			Paragraph signatureDate = new Paragraph(
+//					"SEMNATURA SALARIAT :                                                     " + "DATA (DATE) : "
+//							+ convertTime(System.currentTimeMillis()),
+//					vacationTypeFont);
+//			Paragraph signatureDate2 = new Paragraph("(SIGNATURE EMPLOYEE)", vacationTypeFont);
+//			Paragraph employeeSignature = new Paragraph("_____________________");
+//			Font smallFont = new Font(Font.FontFamily.TIMES_ROMAN, 7);
+//			Paragraph employeeSmallName = new Paragraph(employee.getSecondName() + " " + employee.getFirstName(),
+//					smallFont);
+//			employeeSmallName.setFirstLineIndent(20);
+//			signatureAndDate.add(signatureDate);
+//			signatureAndDate.add(signatureDate2);
+//			signatureAndDate.add(new Paragraph("\n"));
+//			signatureAndDate.add(employeeSignature);
+//			signatureAndDate.add(employeeSmallName);
+//			signatureAndDate.add(new Paragraph("\n"));
+//			document.add(signatureAndDate);
+//			// approved
+//			Paragraph approved = new Paragraph();
+//			PdfPTable approvedTable = new PdfPTable(2);
+//			approvedTable.setWidths(new float[] { 3, 1 });
+//			PdfPCell approvedCell = new PdfPCell(new Phrase("APROBAT (APPROVED)", vacationTypeFont));
+//			PdfPCell refusedCell = new PdfPCell(new Phrase("REFUZAT(REFUSED)", vacationTypeFont));
+//			approvedTable.addCell(approvedCell);
+//			approvedTable.addCell(new PdfPCell(new Phrase(" ")));
+//			approvedTable.addCell(refusedCell);
+//			approvedTable.addCell(new PdfPCell(new Phrase(" ")));
+//			approved.add(approvedTable);
+//			approved.setAlignment(Paragraph.ALIGN_RIGHT);
+//			document.add(approved);
+//			document.close();
+//			pdfFile.close();
+
+		} catch (DocumentException | IOException e) {
+			e.printStackTrace();
+		} finally {
+			document.close();
+		}
+		return document;
+	}
+
+}

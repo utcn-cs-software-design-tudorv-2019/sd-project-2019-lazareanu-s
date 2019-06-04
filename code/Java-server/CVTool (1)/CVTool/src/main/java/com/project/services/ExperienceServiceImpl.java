@@ -24,4 +24,9 @@ public class ExperienceServiceImpl implements ExperienceService {
 		return experienceRepo.findAll();
 	}
 
+	@Override
+	public void delete(Experience experience) {
+		experienceRepo.delete(experience);
+	}
+
 }

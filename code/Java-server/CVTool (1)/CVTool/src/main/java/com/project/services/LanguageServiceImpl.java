@@ -24,4 +24,10 @@ public class LanguageServiceImpl implements LanguageService {
 		return languageRepo.findAll();
 	}
 
+	@Override
+	public void delete(Language language) {
+		languageRepo.delete(language);
+		
+	}
+
 }

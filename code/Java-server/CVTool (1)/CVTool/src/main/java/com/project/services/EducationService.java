@@ -9,5 +9,7 @@ public interface EducationService {
 	Education save(Education education);
 
 	List<Education> getAll();
+	
+	void delete(Education education);
 
 }

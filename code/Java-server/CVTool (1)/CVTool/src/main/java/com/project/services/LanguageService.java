@@ -9,5 +9,7 @@ public interface LanguageService {
 	Language save(Language language);
 
 	List<Language> getAll();
+	
+	void delete(Language language);
 
 }

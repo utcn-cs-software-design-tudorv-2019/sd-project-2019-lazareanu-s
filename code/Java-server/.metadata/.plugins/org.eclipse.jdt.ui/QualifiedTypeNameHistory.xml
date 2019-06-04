@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="com.project.model.User"/>
 <fullyQualifiedTypeName name="com.project.repository.UserRepository"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="antlr.collections.List"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.Objects"/>
@@ -12,4 +10,33 @@
 <fullyQualifiedTypeName name="com.project.services.CvServiceImpl"/>
 <fullyQualifiedTypeName name="com.project.services.UserService"/>
 <fullyQualifiedTypeName name="com.project.services.UserServiceImpl"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
+<fullyQualifiedTypeName name="com.project.services.LanguageService"/>
+<fullyQualifiedTypeName name="com.itextpdf.text.Document"/>
+<fullyQualifiedTypeName name="com.itextpdf.text.Font"/>
+<fullyQualifiedTypeName name="com.itextpdf.text.FontFactory"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+<fullyQualifiedTypeName name="com.itextpdf.text.Image"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="com.itextpdf.text.DocumentException"/>
+<fullyQualifiedTypeName name="com.project.services.EducationService"/>
+<fullyQualifiedTypeName name="com.project.repository.EducationRepository"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Array"/>
+<fullyQualifiedTypeName name="java.sql.Array"/>
+<fullyQualifiedTypeName name="com.itextpdf.text.Paragraph"/>
+<fullyQualifiedTypeName name="java.util.Locale.LanguageRange"/>
+<fullyQualifiedTypeName name="com.project.repository.LanguageRepository"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="com.project.repository.SkillRepository"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="com.project.model.Education"/>
+<fullyQualifiedTypeName name="com.project.model.Experience"/>
+<fullyQualifiedTypeName name="com.project.repository.ExperienceRepository"/>
+<fullyQualifiedTypeName name="com.project.model.Language"/>
+<fullyQualifiedTypeName name="javax.websocket.Session"/>
+<fullyQualifiedTypeName name="org.apache.logging.log4j.message.Message"/>
+<fullyQualifiedTypeName name="org.springframework.boot.web.servlet.server.Session"/>
+<fullyQualifiedTypeName name="javax.mail.Message"/>
+<fullyQualifiedTypeName name="javax.mail.Session"/>
 </qualifiedTypeNameHistroy>

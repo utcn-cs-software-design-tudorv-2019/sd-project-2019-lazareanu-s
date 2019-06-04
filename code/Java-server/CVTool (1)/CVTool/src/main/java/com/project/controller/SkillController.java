@@ -33,4 +33,10 @@ public class SkillController {
 
 	}
 
+	@PostMapping("/delete")
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@RequestBody Skill skill) {
+		skillService.delete(skill);
+	}
+
 }

@@ -33,4 +33,10 @@ public class LanguageController {
 		return languageService.save(language);
 
 	}
+
+	@PostMapping("/delete")
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@RequestBody Language language) {
+		languageService.delete(language);
+	}
 }

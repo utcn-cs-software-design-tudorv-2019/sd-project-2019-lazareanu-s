@@ -34,4 +34,10 @@ public class EducationController {
 
 	}
 
+	@PostMapping("/delete")
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@RequestBody Education education) {
+		educationService.delete(education);
+	}
+
 }

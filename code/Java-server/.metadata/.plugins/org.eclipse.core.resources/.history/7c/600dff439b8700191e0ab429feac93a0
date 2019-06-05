@@ -24,11 +24,11 @@ public class CvController {
 	private CvService cvService;
 
 	@GetMapping("/{user_id}")
-	public List<Cv> getAllByUser(@PathVariable("user_id") Long user_id) {
+	public List<Cv> getAllByUser(@PathVariable("user") Long user) {
 		List<Cv> cvs = cvService.getAll();
 		List<Cv> userCv = new ArrayList<>();
 		for (Cv cv : cvs) {
-			if (user_id.equals(cv.getUser().getId())) {
+			if (user.equals(cv.getUser().getId())) {
 				userCv.add(cv);
 			}
 		}

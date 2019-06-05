@@ -1,12 +1,10 @@
 package com.project.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,17 +21,9 @@ public class CvController {
 	@Autowired
 	private CvService cvService;
 
-	@GetMapping("/{user_id}")
-	public List<Cv> getAllByUser(@PathVariable("user_id") Long user_id) {
-		List<Cv> cvs = cvService.getAll();
-		List<Cv> userCv = new ArrayList<>();
-		for (Cv cv : cvs) {
-			if (user_id.equals(cv.getUser().getId())) {
-				userCv.add(cv);
-			}
-		}
-		return userCv;
-
+	@GetMapping
+	public List<Cv> getAll() {
+		return cvService.getAll();
 	}
 
 	@PostMapping("/generate")
@@ -54,7 +44,7 @@ public class CvController {
 		return cvService.save(cv);
 
 	}
-
+	
 	@PostMapping("/delete")
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@RequestBody Cv cv) {

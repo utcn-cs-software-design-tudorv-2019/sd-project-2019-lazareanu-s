@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.model.Cv;
+import com.project.model.User;
 import com.project.services.CvService;
 
 @RestController
@@ -24,16 +25,16 @@ public class CvController {
 	private CvService cvService;
 
 	@GetMapping("/{user_id}")
-	public List<Cv> getAllByUser(@PathVariable("user_id") Long user_id) {
-		List<Cv> cvs = cvService.getAll();
-		List<Cv> userCv = new ArrayList<>();
-		for (Cv cv : cvs) {
-			if (user_id.equals(cv.getUser().getId())) {
+	public List<Cv> getAllByUser(@PathVariable("user") User user) {
+		List<Cv> cvs= cvService.getAll();
+		List<Cv> userCv=new ArrayList<>();
+		for(Cv cv: cvs) {
+			if(user.getId().equals(cv.getUser().getId())) {
 				userCv.add(cv);
 			}
 		}
 		return userCv;
-
+		
 	}
 
 	@PostMapping("/generate")

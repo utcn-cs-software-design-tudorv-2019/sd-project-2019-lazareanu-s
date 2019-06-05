@@ -184,7 +184,7 @@ public class CvServiceImpl implements CvService {
 			cvRepo.save(cv);
 			sendCvOnEmail(cv.getUser().getEmail(), cv);
 
-		} catch (DocumentException | IOException | MessagingException e) {
+		} catch (DocumentException | IOException e) {
 			e.printStackTrace();
 		} finally {
 			document.close();
@@ -256,13 +256,13 @@ public class CvServiceImpl implements CvService {
 		Session session = Session.getInstance(prop, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("lazareanu_sabina@yahoo.com", "nasturel1*");
+				return new PasswordAuthentication(username, password);
 			}
 		});
 
 		Message message = new MimeMessage(session);
-		message.setFrom(new InternetAddress("lazareanu_sabina@yahoo.com"));
-		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+		message.setFrom(new InternetAddress("from@gmail.com"));
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("to@gmail.com"));
 		message.setSubject("Mail Subject");
 
 		String msg = "This is my first email using JavaMailer";
